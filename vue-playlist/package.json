@@ -1,9 +1,9 @@
 {
-  "name": "vuejs-playlist",
+  "name": "vue-playlist",
   "description": "A Vue.js project",
   "version": "1.0.0",
   "author": "ZD-ong <384474574@qq.com>",
-  "license": "n",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
