@@ -1,10 +1,9 @@
 <template>
   <div v-theme:column="'wide'" id="show-blog">
-    <h1>All Blog Articles</h1>
+    <h1>List Blog Titles</h1>
     <input type="text" v-model="search" placeholder="search blogs...">
     <div v-for="blog in filteredBlogs" class="single-blog">
-        <router-link :to="'/blog/'+blog.id"><h2 v-rainbow>{{blog.title | to-uppercase}}</h2></router-link>
-        <article>{{blog.content | snippet}}</article>
+        <h2 v-rainbow>{{blog.title | to-uppercase}}</h2>
     </div>
   </div>
 </template>
@@ -22,20 +21,14 @@ export default {
   metods: {},
   created() {
     this.$http
-      .get("https://vue-blog-0515.firebaseio.com/posts.json")
+      .get("https://jsonplaceholder.typicode.com/posts")
       .then(function(data) {
-        return data.json()
-      }).then(function(data){
-        var blogsArray = []
-        for(let key in data){
-          data[key].id = key
-          blogsArray.push(data[key])
-        }
-        this.blogs = blogsArray
-      })
+        console.log(data);
+        this.blogs = data.body.slice(0, 10);
+      });
   },
   computed: {
-
+    
   },
   filters: {
     toUppercase: function(value) {
@@ -58,7 +51,7 @@ export default {
     theme: {
       bind(el, binding, vnode) {
         if (binding.value === "wide") {
-          el.style.maxWidth = "960px";
+          el.style.maxWidth = "1200px";
         } else if (binding.value === "narrow") {
           el.style.maxWidth = "560px";
         }
@@ -73,7 +66,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #show-blog {
   max-width: 800px;
   margin: 0 auto;
@@ -84,14 +77,4 @@ export default {
   box-sizing: border-box;
   background: #eee;
 }
-#show-blog a{
-    color: #444;
-    text-decoration: none;
-}
-input[type="text"]{
-    padding: 8px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
 </style>
