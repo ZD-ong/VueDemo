@@ -31,5 +31,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Nunito SemiBold';
+  height: 800px;
 }
 </style>
